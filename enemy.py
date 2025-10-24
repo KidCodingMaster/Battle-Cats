@@ -1,6 +1,7 @@
 import pygame
 from animation import Animation
 from settings import *
+import time
 
 
 class Enemy(pygame.sprite.Sprite):
@@ -16,15 +17,37 @@ class Enemy(pygame.sprite.Sprite):
 
         self.pos = pygame.Vector2(enemy_tower_pos)
 
+        self.end_time = time.time()
+
         self.image = self.animation.img
         self.rect = self.image.get_rect(center=self.pos)
 
     def is_touching_tower(self):
         return self.pos.x >= spawn_point[0]
 
-    def update(self):
-        if not self.is_touching_tower():
+    def attack_(self):
+        if time.time() >= self.end_time:
+            self.end_time = time.time() + self.dps
+            return True
+
+        return False
+
+    def update(self, cats):
+        collided = []
+
+        for cat in cats:
+            if pygame.sprite.collide_mask(cat, self) is not None:
+                collided.append(cat)
+
+        if self.attack_():
+            for cat in collided:
+                cat.health -= self.attack
+
+        if not self.is_touching_tower() and len(collided) <= 0:
             self.pos.x += self.speed
+
+        if self.health <= 0:
+            self.kill()
 
         self.animation.next_frame()
 
