@@ -64,3 +64,14 @@ class Doge(Enemy):
             speed=1,
             animation=Animation(images["doge"], speed=0.2),
         )
+
+
+class Snache(Enemy):
+    def __init__(self):
+        super().__init__(
+            health=100,
+            attack=15,
+            dps=1.23,
+            speed=2,
+            animation=Animation(images["snache"], speed=0.2),
+        )

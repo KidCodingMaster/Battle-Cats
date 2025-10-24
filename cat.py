@@ -67,7 +67,19 @@ class BasicCat(Cat, pygame.sprite.Sprite):
             health=100,
             attack=8,
             dps=1.23,
-            cost=50,
+            cost=cat_prices["basiccat"],
             animation=Animation(images["basiccat"], speed=0.2),
+            speed=2,
+        )
+
+
+class TankCat(Cat, pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__(
+            health=400,
+            attack=2,
+            dps=2.23,
+            cost=cat_prices["tankcat"],
+            animation=Animation(images["tankcat"], speed=0.2),
             speed=2,
         )
