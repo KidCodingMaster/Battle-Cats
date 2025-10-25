@@ -13,7 +13,7 @@ spawn_point = (WINDOW_WIDTH - 150, WINDOW_HEIGHT - 200)
 enemy_tower_pos = (200, WINDOW_HEIGHT - 200)
 
 bg = pygame.transform.scale(
-    pygame.image.load("assets/bg.png"), (WINDOW_WIDTH, WINDOW_HEIGHT)
+    pygame.image.load("assets/bg.png"), (WINDOW_WIDTH + 50, WINDOW_HEIGHT + 50)
 )
 
 cat_tower = pygame.image.load("assets/cat_tower.png")
@@ -25,3 +25,5 @@ enemy_tower_rect = enemy_tower.get_rect(
 )
 
 cat_prices = {"basiccat": 50, "tankcat": 100}
+
+worker_cat_price = 50

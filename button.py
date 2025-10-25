@@ -7,7 +7,7 @@ class Button:
         self.pos = (x, y)
 
         self.button_rect = pygame.Rect(*self.pos, *self.size)
-        self.button_text = pygame.font.SysFont("cosmicsansms", 32).render(
+        self.button_text = pygame.font.SysFont("", 32).render(
             text, False, (255, 255, 255)
         )
 
