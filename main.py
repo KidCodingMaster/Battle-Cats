@@ -2,6 +2,7 @@ import pygame
 from settings import *
 from cat import *
 from enemy import *
+from button import ImageButton
 
 pygame.init()
 
@@ -38,6 +39,9 @@ class Game:
 
         self.dog_end_time = time.time() + random.randint(5, 15)
 
+        self.basic_cat_button = ImageButton("assets/buy_basic.png", 300, 100, scale=0.3)
+        self.tank_cat_button = ImageButton("assets/buy_tank.png", 400, 100, scale=0.3)
+
     def run(self):
         while True:
             self.clock.tick(60)
@@ -49,11 +53,11 @@ class Game:
                     pygame.quit()
                     break
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    if event.button == 1:
+                    if self.basic_cat_button.is_clicked():
                         if self.money >= cat_prices["basiccat"]:
                             self.cats.add(BasicCat())
                             self.money -= cat_prices["basiccat"]
-                    else:
+                    if self.tank_cat_button.is_clicked():
                         if self.money >= cat_prices["tankcat"]:
                             self.cats.add(TankCat())
                             self.money -= cat_prices["tankcat"]
@@ -83,7 +87,7 @@ class Game:
 
                 if time.time() >= self.money_end_time:
                     self.money_end_time = time.time() + 0.1
-                    if self.money+ 1 <= self.money_cap:
+                    if self.money + 1 <= self.money_cap:
                         self.money += 1
 
                 self.enemy_health_text = self.font.render(
@@ -117,6 +121,9 @@ class Game:
                     self.money_text,
                     (1000, 25),
                 )
+
+                self.basic_cat_button.draw(self.screen)
+                self.tank_cat_button.draw(self.screen)
             elif self.won == "yes":
                 self.screen.blit(self.won_text, (WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2))
             elif self.won == "no":
